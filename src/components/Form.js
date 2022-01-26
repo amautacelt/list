@@ -1,17 +1,41 @@
 import React from "react";
 
-const Form = ({inputText, setInputText}) => {
+const Form = ({inputText, setInputText, todos, setTodos, option, setOption}) => {
 
     const inputChange = e => {
         setInputText(e.target.value)
     }
 
+    const selectChange = e => {
+        setOption(e.target.value)
+    }
+
+    const inputSubmit = () => {
+
+        if(inputText === '') {
+            return
+        }else {
+            setTodos([...todos, {text:inputText, completed:false, id:Math.random() * 1000}])
+            setInputText('')
+        }
+    }
+
     return (
-        <div className="input_container">
-            <div className="input_button">
+        <div className="input__container">
+
+            <div className="input__button">
                 <input type="text" value={inputText} onChange={inputChange} />
-                <button>ADD</button>
+                <button onClick={inputSubmit}>ADD</button>
             </div>
+
+            <div className="select">
+                <select name="todos" className="filter" onChange={selectChange}>
+                    <option value="all">All</option>
+                    <option value="finished">finished</option>
+                    <option value="uncompleted">uncompleted</option>
+                </select>
+            </div>
+
         </div>
     )
 }
