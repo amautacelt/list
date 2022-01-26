@@ -1,24 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Form from './components/Form';
 import TodoList from './components/TodoList';
 
+
 function App() {
 
-  const [inputText, setInputText] = useState('');
-  const [todos, setTodos] = useState([]);
+  const [inputText,setInputText] = useState('');
+  const [todos,setTodos] = useState([])
 
-  const [option, setOption] = useState('all')
-  const [changer, setChanger] = useState([]);
+  const [option,setOption] = useState('all')
+  const [changer,setChanger] = useState([]);
+
 
   useEffect(() => {
     getFromLocal()
-  }, [])
+  },[])
+
 
   useEffect(() => {
     changeOptions()
     saveToLocal();
-  }, [todos, option])
+  },[todos,option])
+
 
   const changeOptions = () => {
     switch(option) {
@@ -39,23 +43,24 @@ function App() {
     }
   }
 
-  const saveToLocal = () => {
-    localStorage.setItem("todos", JSON.stringify(todos))
-  }
+const saveToLocal = () => {
+  localStorage.setItem("todos",JSON.stringify(todos))
+}
 
-  const getFromLocal = () => {
-    if(localStorage.getItem("todos") === null) {
-      localStorage.setItem("todos", JSON.stringify([]));
-    }else {
-      let local = JSON.parse(localStorage.getItem("todos"))
-      setTodos(local);
-    }
+const getFromLocal = () => {
+  if(localStorage.getItem("todos") === null) {
+    localStorage.setItem("todos",JSON.stringify([]));
+  }else {
+    let local = JSON.parse(localStorage.getItem("todos"))
+    setTodos(local);
   }
+}
+
 
   return (
     <div className="App">
-      <Form inputText={inputText} setInputText={setInputText} todos={todos} setTodos={setTodos} option={option} setOption={setOption} />
-      <TodoList todos={todos} setTodos={setTodos} changer={changer} />
+      <Form inputText={inputText} setInputText={setInputText} todos={todos} setTodos={setTodos} option={option} setOption={setOption}/>
+      <TodoList todos={todos} setTodos={setTodos} changer={changer}/>
     </div>
   );
 }

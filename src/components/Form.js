@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-const Form = ({inputText, setInputText, todos, setTodos, option, setOption}) => {
+const Form = ({inputText,setInputText,setTodos,todos,option,setOption}) => {
 
     const inputChange = e => {
         setInputText(e.target.value)
@@ -13,28 +13,31 @@ const Form = ({inputText, setInputText, todos, setTodos, option, setOption}) => 
     const inputSubmit = () => {
 
         if(inputText === '') {
-            return
+            return 
         }else {
-            setTodos([...todos, {text:inputText, completed:false, id:Math.random() * 1000}])
+            setTodos([...todos,{text:inputText,completed:false,id:Math.random() * 1000}])
             setInputText('')
         }
     }
 
+
     return (
-        <div className="input__container">
+        <div className='input__container'>
 
-            <div className="input__button">
-                <input type="text" value={inputText} onChange={inputChange} />
-                <button onClick={inputSubmit}>ADD</button>
-            </div>
+                <div className="input__button">
+                    <input type="text" value={inputText} onChange={inputChange}/>
+                    <button onClick={inputSubmit}>ADD</button>
+                </div>
 
-            <div className="select">
-                <select name="todos" className="filter" onChange={selectChange}>
+
+                <div className="select">
+                    <select name="todos" className='filter' onChange={selectChange}>
                     <option value="all">All</option>
-                    <option value="finished">finished</option>
-                    <option value="uncompleted">uncompleted</option>
-                </select>
-            </div>
+                    <option value="finished">Finished</option>
+                    <option value="uncompleted">Uncompleted</option>
+                    </select>
+                </div>
+
 
         </div>
     )
